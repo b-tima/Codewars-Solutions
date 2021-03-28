@@ -1,6 +1,16 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#define atoi my_own_function
+
+int my_own_function(char *str){
+    int result = 0;
+    while(*str != '\0'){
+        result = 10 * result + (*(str++) - '0');
+    }
+    return result;
+}
+
 int cycle(int n){
     if(n % 2 == 0 || n % 5 == 0){
         return -1;
@@ -19,6 +29,7 @@ int main(int argc, char **argv){
     }
 
     int n = atoi(argv[1]);
+
     int result = cycle(n);
 
     printf("n = %i, count = %i\n", n, result);
