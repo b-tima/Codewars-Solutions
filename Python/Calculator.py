@@ -11,18 +11,6 @@ class Calculator(object):
         except ValueError:
             return False
 
-    def findTopParentheses(self, string):
-        left = 0
-        right = len(string) - 1
-
-        while string[left] != '(' or string[right] != ')':
-            if string[left] != '(':
-                left+=1
-            if string[right] != ')':
-                right-=1
-
-        return left, right
-
     def infix2postfix(self, tokens):
         output = []
         operatorStack = []
@@ -48,8 +36,8 @@ class Calculator(object):
                         last = operatorStack.pop(0)
                         output.append(last)
             else:
-                left, right = self.findTopParentheses(tokens)
-                output.extend(self.infix2postfix(tokens[left+1:right]))
+                right = "".join(tokens).rindex(')')
+                output.extend(self.infix2postfix(tokens[0:right]))
                 tokens = tokens[right+1:]
 
         output.extend(operatorStack)
